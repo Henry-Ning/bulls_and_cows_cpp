@@ -8,6 +8,7 @@ void UBullCowCartridge::BeginPlay() // When the game starts
     PrintLine(TEXT("Guess the 4 letter word!")); // Magic Number!
     PrintLine(TEXT("Input something and press enter"));
     HiddenWord = TEXT("cake");
+    PlayerLives = 3;
 }
 
 void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
@@ -22,7 +23,11 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     {
         PrintLine(Input);
         PrintLine(TEXT("is not correct!"));
-        PrintLine(TEXT("Try again"));
+        --PlayerLives;
+        if (PlayerLives == 0)
+        {
+            PrintLine(TEXT("Game Over"));
+        }
     }
     
 
