@@ -6,13 +6,11 @@ void UBullCowCartridge::BeginPlay() // When the game starts
     Super::BeginPlay();
     
     //Welcomeing the Player
-    PrintLine(TEXT("Hi Henry!"));
+    PrintLine(TEXT("Happy July 6th!"));
     PrintLine(TEXT("Guess the 4 letter word!")); // Magic Number!
     PrintLine(TEXT("Input something and press enter"));
     
-    //Setting up Game
-    HiddenWord = TEXT("cake"); //Set the HiddenWord
-    PlayerLives = 3; //Set Lives
+    InitGame();//Setting up Game
 
     //Prompt player to guess
 }
@@ -29,8 +27,8 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     {
         PrintLine(Input);
         PrintLine(TEXT("is not correct!"));
-        --PlayerLives; // Lose lives
-        if (PlayerLives == 0)
+        --Lives;// Lose lives
+        if (Lives == 0)
         {
             PrintLine(TEXT("Game Over"));
         }
@@ -51,4 +49,10 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     //Check User Input    
     //PlayAgain or Quit
 
+}
+
+void UBullCowCartridge::InitGame()
+{
+    HiddenWord = TEXT("cake"); 
+    Lives = 4; 
 }
