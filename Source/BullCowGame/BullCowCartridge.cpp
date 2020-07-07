@@ -6,11 +6,11 @@ void UBullCowCartridge::BeginPlay() // When the game starts
     Super::BeginPlay();
     
     //Welcomeing the Player
-    PrintLine(TEXT("Happy July 6th!"));
+    PrintLine(TEXT("Happy July 7th!"));
     PrintLine(TEXT("Guess the 4 letter word!")); // Magic Number!
     PrintLine(TEXT("Input something and press enter"));
     
-    InitGame();//Setting up Game
+    SetupGame();
 
     //Prompt player to guess
 }
@@ -51,7 +51,7 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
 
 }
 
-void UBullCowCartridge::InitGame()
+void UBullCowCartridge::SetupGame()
 {
     HiddenWord = TEXT("cake"); 
     Lives = 4; 
