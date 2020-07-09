@@ -6,7 +6,7 @@ void UBullCowCartridge::BeginPlay() // When the game starts
     Super::BeginPlay();
     
     //Welcomeing the Player
-    PrintLine(TEXT("Happy July 7th!"));
+    PrintLine(TEXT("Happy July 8th!"));
     PrintLine(TEXT("Guess the 4 letter word!")); // Magic Number!
     PrintLine(TEXT("Input something and press enter"));
     
@@ -25,13 +25,11 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     }
     else 
     {
-        PrintLine(Input);
-        PrintLine(TEXT("is not correct!"));
-        --Lives;// Lose lives
-        if (Lives == 0)
+        if (Input.Len() != HiddenWord.Len()) 
         {
-            PrintLine(TEXT("Game Over"));
+            PrintLine(TEXT("The Hidden Word is 4 characters long, try again!"));
         }
+        PrintLine(TEXT("You have lost!"));
     }
     
     //Check if it's an isogram
