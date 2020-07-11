@@ -8,32 +8,33 @@ void UBullCowCartridge::BeginPlay() // When the game starts
     SetupGame();
 
     PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); //Debug line
-
-    //Welcomeing the Player
-    PrintLine(TEXT("Happy July 8th!"));
-    PrintLine(TEXT("Guess the %i letter word!"), HiddenWord.Len());
-    PrintLine(TEXT("Type in your guess and press enter"));
-    
-
-    //Prompt player to guess
 }
 
 void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
 {
-    ClearScreen();
-    
-    if (Input == HiddenWord) 
+
+    if (bGameOver) 
     {
-        PrintLine(TEXT("You win"));
+        ClearScreen();
+        SetupGame();
     }
-    else 
+    else // Checking PlayerGuess
     {
-        if (Input.Len() != HiddenWord.Len()) 
+        if (Input == HiddenWord) 
         {
-            PrintLine(TEXT("The Hidden Word is %i characters long, try again!"), HiddenWord.Len());
+            PrintLine(TEXT("You win"));
+            EndGame();
         }
-        PrintLine(TEXT("You have lost!"));
+        else 
+        {
+            if (Input.Len() != HiddenWord.Len()) 
+            {
+                PrintLine(TEXT("The Hidden Word is %i characters long. \nYou have lost!"), HiddenWord.Len());
+                EndGame();
+            }
+        }
     }
+    
     
     //Check if it's an isogram
     //Prompt to Guess Again
@@ -54,6 +55,19 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
 
 void UBullCowCartridge::SetupGame()
 {
+    //Welcomeing the Player
+    PrintLine(TEXT("Happy July 10th!"));
+
     HiddenWord = TEXT("cakes"); 
     Lives = 4; 
+    bGameOver = false;
+    
+    PrintLine(TEXT("Guess the %i letter word!"), HiddenWord.Len());
+    PrintLine(TEXT("Type in your guess \nPress enter to continue..."));
+}
+
+void UBullCowCartridge::EndGame()
+{
+    bGameOver = true;
+    PrintLine(TEXT("Press enter to continue."));
 }
