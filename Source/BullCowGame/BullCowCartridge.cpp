@@ -123,7 +123,7 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
 
 }
 
-bool UBullCowCartridge::IsIsogram(FString Word)
+bool UBullCowCartridge::IsIsogram(FString Word) const
 {
     // For reach letter,
     // Start at element [0],
