@@ -30,7 +30,7 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
 void UBullCowCartridge::SetupGame()
 {
     //Welcomeing the Player
-    PrintLine(TEXT("Happy July 14th 10am!"));
+    PrintLine(TEXT("Happy July 14th 14:37!"));
 
     HiddenWord = TEXT("cakes"); 
     Lives = HiddenWord.Len(); 
@@ -128,13 +128,27 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
 bool UBullCowCartridge::IsIsogram(FString Word) const
 {
     
-    for (int32 Index = 0, Comparison = Index + 1; Comparison < Word.Len(); Comparison++)
-    {
-        if (Word[Index]==Word[Comparison])
-        {
-            return false;
+    // for (int32 Index = 0, Comparison = Index + 1; Comparison < Word.Len(); Comparison++)
+    // {   
+    //     if (Word[Index]==Word[Comparison])
+    //     {
+    //         return false;
+    //     }
+
+    //     Index++;   
+    // }
+
+    for (int32 Index = 0; Index < Word.Len(); Index++)
+    {   
+        for (int32 Comparison = Index + 1; Comparison < Word.Len(); Comparison++)
+        {   
+            if (Word[Index]==Word[Comparison])
+            {
+                return false;
+            } 
         }
     }
+
     // For reach letter,
     // Start at element [0],
     // Compare against the next letter, 
