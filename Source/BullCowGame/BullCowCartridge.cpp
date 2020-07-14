@@ -30,7 +30,7 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
 void UBullCowCartridge::SetupGame()
 {
     //Welcomeing the Player
-    PrintLine(TEXT("Happy July 13th 11am!"));
+    PrintLine(TEXT("Happy July 14th 10am!"));
 
     HiddenWord = TEXT("cakes"); 
     Lives = HiddenWord.Len(); 
@@ -74,6 +74,7 @@ void UBullCowCartridge::EndGame()
 
 void UBullCowCartridge::ProcessGuess(FString Guess)
 {
+
     if (Guess == HiddenWord) 
     {
         PrintLine(TEXT("You win"));
@@ -93,6 +94,7 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
     {
         PrintLine(TEXT("No repeating letters, guess again"));
         return;
+
     }
 
 
@@ -130,5 +132,11 @@ bool UBullCowCartridge::IsIsogram(FString Word) const
     // Compare against the next letter, 
     // Until we reach [Word.Len() - 1],
     // if any are the same return false.  
+
+    for (int32 Index = 0; Index < Word.Len(); Index++)
+    {
+        PrintLine(TEXT("%c"), Word[Index]);
+    }
+
     return true;
 }
