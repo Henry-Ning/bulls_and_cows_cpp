@@ -9,6 +9,11 @@ void UBullCowCartridge::BeginPlay() // When the game starts
     SetupGame();
 
     PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); //Debug line
+
+    for (int32 Index = 0; Index < 5; Index++)
+    {
+        PrintLine(TEXT("%s"), *Words[Index]);
+    }
 }
 
 void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
@@ -31,7 +36,7 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
 void UBullCowCartridge::SetupGame()
 {
     //Welcomeing the Player
-    PrintLine(TEXT("Happy July 14th 14:37!"));
+    PrintLine(TEXT("Happy July 14th 18:32!"));
 
     HiddenWord = TEXT("cakes"); 
     Lives = HiddenWord.Len(); 
