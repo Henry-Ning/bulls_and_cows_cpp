@@ -32,7 +32,7 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
 void UBullCowCartridge::SetupGame()
 {
     //Welcomeing the Player
-    PrintLine(TEXT("Happy July 15th 18:12!"));
+    PrintLine(TEXT("Happy July 16th 12:15!"));
 
     HiddenWord = TEXT("cakes"); 
     Lives = HiddenWord.Len(); 
@@ -164,11 +164,19 @@ TArray<FString> UBullCowCartridge::GetValidWords(TArray<FString> WordList) const
 {
     TArray<FString> ValidWords;
 
-    for (int32 Index =0; Index < WordList.Num(); Index++)
+    // for (int32 Index =0; Index < WordList.Num(); Index++)
+    // {
+    //     if(WordList[Index].Len()>=4 && WordList[Index].Len()<=8 && IsIsogram(WordList[Index]))
+    //     {
+    //         ValidWords.Emplace(WordList[Index]);
+    //     }
+    // }
+
+      for (FString Word : WordList)
     {
-        if(WordList[Index].Len()>=4 && WordList[Index].Len()<=8 && IsIsogram(WordList[Index]))
+        if(Word.Len()>=4 && Word.Len()<=8 && IsIsogram(Word))
         {
-            ValidWords.Emplace(WordList[Index]);
+            ValidWords.Emplace(Word);
         }
     }
 
