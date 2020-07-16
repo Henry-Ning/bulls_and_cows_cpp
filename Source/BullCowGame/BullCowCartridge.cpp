@@ -5,23 +5,11 @@
 void UBullCowCartridge::BeginPlay() // When the game starts
 {
     Super::BeginPlay();
-    
+    GetValidWords(Words);
     SetupGame();
 
+    PrintLine(TEXT("The number of valid words is: %i"), GetValidWords(Words).Num());
     PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); //Debug line
-
-    // for (int32 Index = 0; Index < 5; Index++)
-    // {
-    //     PrintLine(TEXT("%s"), *Words[Index]);
-    // }
-    
-    for (int32 Index =0; Index < 10; Index++)
-    {
-        if(Words[Index].Len()>=4 && Words[Index].Len()<=8)
-        {
-            PrintLine(TEXT("%s"), *Words[Index]);
-        }
-    }
 }
 
 void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
@@ -44,7 +32,7 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
 void UBullCowCartridge::SetupGame()
 {
     //Welcomeing the Player
-    PrintLine(TEXT("Happy July 14th 18:32!"));
+    PrintLine(TEXT("Happy July 15th 18:12!"));
 
     HiddenWord = TEXT("cakes"); 
     Lives = HiddenWord.Len(); 
@@ -170,4 +158,19 @@ bool UBullCowCartridge::IsIsogram(FString Word) const
     // if any are the same return false.  
 
     return true;
+}
+
+TArray<FString> UBullCowCartridge::GetValidWords(TArray<FString> WordList) const
+{
+    TArray<FString> ValidWords;
+
+    for (int32 Index =0; Index < WordList.Num(); Index++)
+    {
+        if(WordList[Index].Len()>=4 && WordList[Index].Len()<=8 && IsIsogram(WordList[Index]))
+        {
+            ValidWords.Emplace(WordList[Index]);
+        }
+    }
+
+    return ValidWords;
 }
