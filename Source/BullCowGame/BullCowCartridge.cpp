@@ -5,6 +5,8 @@
 void UBullCowCartridge::BeginPlay() // When the game starts
 {
     Super::BeginPlay();
+    
+    Isograms = GetValidWords(Words);
 
     SetupGame();
 }
@@ -31,7 +33,7 @@ void UBullCowCartridge::SetupGame()
     //Welcomeing the Player
     PrintLine(TEXT("Happy July 16th 17:12!"));
 
-    HiddenWord = GetValidWords(Words)[FMath::RandRange(0,GetValidWords(Words).Num()-1)]; 
+    HiddenWord = Isograms[FMath::RandRange(0,Isograms.Num()-1)]; 
     Lives = HiddenWord.Len(); 
     bGameOver = false;
     
