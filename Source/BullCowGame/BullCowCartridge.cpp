@@ -5,11 +5,8 @@
 void UBullCowCartridge::BeginPlay() // When the game starts
 {
     Super::BeginPlay();
-    GetValidWords(Words);
-    SetupGame();
 
-    PrintLine(TEXT("The number of valid words is: %i"), GetValidWords(Words).Num());
-    PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); //Debug line
+    SetupGame();
 }
 
 void UBullCowCartridge::OnInput(const FString& PlayerInput) // When the player hits enter
@@ -32,19 +29,17 @@ void UBullCowCartridge::OnInput(const FString& PlayerInput) // When the player h
 void UBullCowCartridge::SetupGame()
 {
     //Welcomeing the Player
-    PrintLine(TEXT("Happy July 16th 16:09!"));
+    PrintLine(TEXT("Happy July 16th 17:12!"));
 
-    HiddenWord = TEXT("cakes"); 
+    HiddenWord = GetValidWords(Words)[FMath::RandRange(0,GetValidWords(Words).Num()-1)]; 
     Lives = HiddenWord.Len(); 
     bGameOver = false;
     
     PrintLine(TEXT("Guess the %i letter word!"), HiddenWord.Len());
     PrintLine(TEXT("You have %i lives."), Lives);
     PrintLine(TEXT("Type in your guess and \npress enter to continue..."));
+    PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); //Debug line
 
-    // const TCHAR HW[] = TEXT("plums");
-    // PrintLine(TEXT("Character 1 of the hidden word is: %c"), HiddenWord[0]);
-    // PrintLine(TEXT("The 4th character of HW is: %c"), HW[3]); 
     
 }
 
