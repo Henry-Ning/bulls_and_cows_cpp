@@ -31,7 +31,7 @@ void UBullCowCartridge::OnInput(const FString& PlayerInput) // When the player h
 void UBullCowCartridge::SetupGame()
 {
     //Welcomeing the Player
-    PrintLine(TEXT("Happy July 16th 19:45!"));
+    PrintLine(TEXT("Happy July 16th 20:28!"));
 
     HiddenWord = Isograms[FMath::RandRange(0,Isograms.Num()-1)]; 
     Lives = HiddenWord.Len(); 
@@ -39,7 +39,7 @@ void UBullCowCartridge::SetupGame()
     
     PrintLine(TEXT("Guess the %i letter word!"), HiddenWord.Len());
     PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); //Debug line
-    
+
     PrintLine(TEXT("You have %i lives."), Lives);
     PrintLine(TEXT("Type in your guess and \npress enter to continue..."));
     
@@ -208,6 +208,7 @@ void UBullCowCartridge::GetBullCows(const FString& Guess, int32& BullCount, int3
             if (Guess[GuessIndex] == HiddenWord[HiddenIndex])
             {
                 CowCount++;
+                break;
             }
         }
 
