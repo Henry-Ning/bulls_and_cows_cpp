@@ -5,7 +5,7 @@
 void UBullCowCartridge::BeginPlay() // When the game starts
 {
     Super::BeginPlay();
-    
+
     Isograms = GetValidWords(Words);
 
     SetupGame();
@@ -31,16 +31,18 @@ void UBullCowCartridge::OnInput(const FString& PlayerInput) // When the player h
 void UBullCowCartridge::SetupGame()
 {
     //Welcomeing the Player
-    PrintLine(TEXT("Happy July 16th 17:12!"));
+    PrintLine(TEXT("Happy July 16th 19:45!"));
 
     HiddenWord = Isograms[FMath::RandRange(0,Isograms.Num()-1)]; 
     Lives = HiddenWord.Len(); 
     bGameOver = false;
     
     PrintLine(TEXT("Guess the %i letter word!"), HiddenWord.Len());
+    PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); //Debug line
+    
     PrintLine(TEXT("You have %i lives."), Lives);
     PrintLine(TEXT("Type in your guess and \npress enter to continue..."));
-    PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); //Debug line
+    
 
     
 }
@@ -112,6 +114,11 @@ void UBullCowCartridge::ProcessGuess(const FString& Guess)
     }
 
     // Show the player Bulls and cows
+    int32 Bulls, Cows;
+    GetBullCows(Guess, Bulls, Cows);
+
+    PrintLine(TEXT("You have %i Bulls and %i Cows"), Bulls, Cows);
+
     PrintLine(TEXT("Guess again, you have %i lives left"), Lives);
 
     //Check if lives > 0 
@@ -178,4 +185,32 @@ TArray<FString> UBullCowCartridge::GetValidWords(const TArray<FString>& WordList
     }
 
     return ValidWords;
+}
+
+void UBullCowCartridge::GetBullCows(const FString& Guess, int32& BullCount, int32& CowCount) const
+{
+    BullCount = 0;
+    CowCount = 0;
+
+    // if the index Guess is same as index Hidden BUllCount ++
+    // if not a bull was it a cow? if yes CowCount++
+
+    for (int32 GuessIndex = 0; GuessIndex < Guess.Len(); GuessIndex++)
+    {
+        if(Guess[GuessIndex] == HiddenWord[GuessIndex])
+        {
+            BullCount++;
+            continue;
+        }
+
+        for (int32 HiddenIndex = 0; HiddenIndex < HiddenWord.Len(); HiddenIndex++)
+        {
+            if (Guess[GuessIndex] == HiddenWord[HiddenIndex])
+            {
+                CowCount++;
+            }
+        }
+
+    }
+    
 }
